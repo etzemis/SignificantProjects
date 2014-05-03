@@ -1,0 +1,78 @@
+
+package Server;
+import java.io.*;
+import java.net.*;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
+
+
+public class ChatHandler implements Runnable{
+    
+     private BufferedReader in;
+     private PrintWriter rivalOut;
+     ClientHandler clientHandler;
+     CoinHandler coinH;
+
+    public ChatHandler(BufferedReader in,PrintWriter out,ClientHandler ch,CoinHandler coinH){
+        this.in=in;
+        rivalOut=out;
+        clientHandler=ch;
+        this.coinH=coinH;
+    }
+
+    public void run(){
+        try{
+            String msg;
+            System.out.println("ChatHandler thread started");
+            System.out.flush();
+            while(true){
+                msg = in.readLine();
+                if(msg.equalsIgnoreCase("Send")){
+                    msg=in.readLine();
+                    rivalOut.println("("+now()+") "+msg);
+                    System.out.println(msg);
+                }
+                else if(msg.equalsIgnoreCase("Result")){                        //to result to stelnei otan exei turn=1
+                    msg=in.readLine();
+                    clientHandler.setGameResult(msg);
+                    rivalOut.println("gameOver");
+                    break;
+                }
+                else if(msg.equalsIgnoreCase("gameOver")){                      //gameover stelnei otan exei turn=0
+                    rivalOut.println("gameOver");
+                    break;
+                }
+                else if(msg.equalsIgnoreCase("buyCoins")){
+                    coinH.buyCoins(in.readLine(),in.readLine(),in.readLine());//username password money
+                }
+                else if(msg.equalsIgnoreCase("updateCreditsFromBank")){
+                    String username = in.readLine();
+                    int money = updates();
+                    //alla3e th bash
+                    
+                }
+            }
+        }
+        catch(IOException e){
+            System.err.println("ChatHandler error "+ e.toString());
+        }
+    }
+
+    String now() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        return sdf.format(cal.getTime());
+    }
+
+    private static int updates() {
+        services.GameServerServiceService service = new services.GameServerServiceService();
+        services.GameServerService port = service.getGameServerServicePort();
+        return port.updates();
+    }
+
+
+
+}
+

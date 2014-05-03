@@ -1,0 +1,8 @@
+partition
+http://localhost:12347/AccountManagerPartition1?wsdl
+1
+2
+partition
+http://localhost:12348/AccountManagerPartition2?wsdl
+3
+4

@@ -1,0 +1,20 @@
+::VGRID::
+eScience/Courses/ClusterComputing
+
+::EXECUTE::
+python a1/nbody.py
+
+::INPUTFILES::
+a1/nbody.py
+a1/nbodyphysics.py
+
+::CPUTIME::
+900
+
+::MEMORY::
+12000
+
+::RUNTIMEENVIRONMENT::
+NUMPY-1.X-1
+PYTHON-2.X-1
+PYOPENCL-2012.X-1

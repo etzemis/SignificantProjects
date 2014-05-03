@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include "files.h"
+////////////////////////////////////////////////////////////////////////////////////////////////////
+volatile sig_atomic_t fl = 0;
+
+void handle_sigusr1(int signum) {
+	fl = 1;
+	printf("/\\/\\ Child Process %d: Received USR1\n", getpid());
+}
+
+void handle_sigkill(){
+	printf("/\\/\\ My dad has killed me !!! Child process %d \n",getpid());
+}
+
+int main(int argc , char* argv[]){
+	//previous , input file , output , key , length
+	int previous = atoi(argv[1]) , length = atoi(argv[5]) , l;
+	FILE *input , *output;
+	char	*k  , *key, *m ,*message , *bin;
+	int i , j , N = atoi(argv[6]);
+	char *hex;
+	
+	hex = malloc(16);
+	m = malloc(9);
+	message = malloc(64);
+	key = malloc(128);
+	input = fopen(argv[2] , "r");
+	output = fopen(argv[3] , "r+");
+	k = argv[4];
+	
+	memset(message , 0 , 64);
+	memset(key , 0 , 128);
+		
+	//printf ( "input = %s output = %s key = %s length = %d\n" ,argv[2] , argv[3] , k , length);
+	//printf("previous = %d \n",previous);
+	printf("--- Child: My PID: %d, PPID: %d\n", getpid(), getppid());
+	signal(SIGUSR1, handle_sigusr1);
+	signal(SIGKILL, handle_sigkill);
+	
+	/* Send signal to parent to notify that i have set my signal handler */
+	kill(getppid(), SIGUSR1);
+	
+	while(!fl)
+		pause();     //wait for a signal
+	
+	if(previous != -1)
+		kill(previous , SIGUSR1);
+	
+	//i have send a signal to the previous created child
+////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	fread(m , 8 , sizeof(char) , input);
+	printf("egine to diabasma apo to input\n m = %s\n" , m);
+	l = 15;
+	for(i = 0 ; i < 8 ; i++){
+		bin = asci_to_bin(m[7-i]); 
+		for(j = 8*i ; j<((8*i)+8) ; j++)
+			message[j] = bin[j-8*i];
+		free(bin);	
+	}
+	
+	for(i = 0; i<64 ; i++)
+		printf("%d ",message[i]); 
+	printf("\n");
+	
+	bin = malloc(4);
+	
+	for(i = 0 ; i <32 ; i++){
+		hex_to_bin(k[31-i] , bin);
+		for(j = 4*i ; j<4*i+4 ; j++)
+			key[j] = bin[j-4*i];
+	}
+			
+	message = iceberg_encrypt(key , message , N);
+	 
+	for(i = 0 ; i<64 ; i+=4){
+		for(j = i ; j<i+4 ; j++)
+			bin[j-i] = message[j];   // s_buffer has the first 4 bits from the array a[]
+		hex[l] = bin_to_hex(bin);
+		l--;
+	}
+	//prepei na to grapsoume mesa sto arxeio e3odou
+	fwrite(hex , 16 , sizeof(char) , output);
+	
+	fclose(input);
+	fclose(output);
+////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	printf("The child with pid %d has finished its work..........\n", getpid() );
+	return 0;	
+}

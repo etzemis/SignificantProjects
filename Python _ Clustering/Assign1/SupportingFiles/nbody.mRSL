@@ -1,0 +1,19 @@
+::VGRID::
+eScience/Courses/ClusterComputing
+
+::EXECUTE::
+python a1/nbodyVec.py
+
+::INPUTFILES::
+a1/nbodyVec.py
+a1/nbodyphysicsVec.py
+
+::CPUTIME::
+900
+
+::MEMORY::
+12000
+
+::RUNTIMEENVIRONMENT::
+NUMPY-1.X-1
+PYTHON-2.X-1

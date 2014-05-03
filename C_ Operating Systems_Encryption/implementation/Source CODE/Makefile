@@ -1,0 +1,10 @@
+all: child iceberg
+
+iceberg: parent.o
+	gcc	parent.o -o iceberg
+
+child:	child.o iceberg.o key.o p-box.o round.o s-box.o transform.o
+	gcc child.c iceberg.c key.c p-box.c round.c s-box.c transform.c -g -o child
+
+clean:
+	/bin/rm -f child iceberg child.o iceberg.o key.o p-box.o round.o s-box.o transform.o parent.o

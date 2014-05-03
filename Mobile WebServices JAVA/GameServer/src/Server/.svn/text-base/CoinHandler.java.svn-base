@@ -1,0 +1,112 @@
+
+
+package Server;
+
+import java.io.*;
+import java.net.*;
+
+
+public class CoinHandler implements Runnable {
+
+    private int id1,id2;
+    private PrintWriter out1,out2;
+    boolean allDone=false;
+    boolean stop=false;
+    int player;
+
+
+    public CoinHandler(PrintWriter out1,PrintWriter out2,int id1,int id2){
+        this.id1=id1;
+        this.id2=id2;
+        this.out2=out2;
+        this.out1=out1;
+    }
+
+    public void run(){
+        Player pOne=null,pTwo=null;
+        int i;
+        try{
+            System.out.println("coinHandler thread started");
+            for(i=0;i<Server.Stats.size();i++){
+                if(Server.Stats.get(i).hasID(id1)){
+                    pOne=Server.Stats.get(i);///////////////////////////////////leitoyrgei san deikths h oxi? gamv thn java moy
+                }
+                if(Server.Stats.get(i).hasID(id2)){
+                    pTwo=Server.Stats.get(i);
+                }
+            }
+            while(stop==false){
+                if(pOne.coins==0){
+                    player=1;
+                    out1.println("doCommand buyMore ");
+                    out2.println("doCommand halt ");
+                    while(allDone==false){
+                        Thread.yield();
+                    }
+                    allDone=false;
+                    out1.println("doCommand continue ");
+                    out2.println("doCommand continue ");//out2.println("continue ");
+                }
+                if(pTwo.coins==0){
+                    player=2;
+                    out2.println("doCommand buyMore ");//out2.println("buyMore ");
+                    out1.println("doCommand halt ");//out1.println("halt ");
+                    while(allDone==false){
+                        Thread.yield();
+                    }
+                    allDone=false;
+                    out1.println("doCommand continue ");//out1.println("continue ");
+                    out2.println("doCommand continue ");
+                }
+                Thread.sleep(1000);
+                pOne.coins--;
+                pTwo.coins--;
+            }
+
+        }
+        catch(Exception e){
+
+        }
+    }
+
+    void buyCoins(String username, String password, String money){
+        int m = Integer.parseInt(money);
+        String result=getCredits(username,password,m);
+        if(result.equalsIgnoreCase("success")){
+            allDone=true;
+            //alla3e th bash
+        }
+        else if(result.equalsIgnoreCase("Not enough money")){
+            if(player==1){
+                out1.println("doCommand  NotEnoughMoney ");
+            }
+            else{
+                out2.println("doCommand  NotEnoughMoney ");
+            }
+        }
+        else if(result.equalsIgnoreCase("User does not exist")){
+            if(player==1){
+                out1.println("doCommand  UserDoesNotExist ");
+            }
+            else{
+                out2.println("doCommand  UserDoesNotExist ");
+            }
+        }
+    }
+
+    void stop(){
+        stop=true;
+    }
+
+    void allDone(){
+        allDone=true;
+    }
+
+    private static String getCredits(java.lang.String username, java.lang.String password, int money) {
+        services.GameServerServiceService service = new services.GameServerServiceService();
+        services.GameServerService port = service.getGameServerServicePort();
+        return port.getCredits(username, password, money);
+    }
+
+
+}

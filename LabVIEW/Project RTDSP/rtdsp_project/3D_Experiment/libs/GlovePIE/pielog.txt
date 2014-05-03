@@ -1,0 +1,123 @@
+(0, 08-Απρ-2011 21:44:43) Initializing PieLog
+(0, 08-Απρ-2011 21:44:43) Initializing filemode variable
+(0, 08-Απρ-2011 21:44:43) Initializing PieSpeech
+(0, 08-Απρ-2011 21:44:43) Initializing PieVariables
+(0, 08-Απρ-2011 21:44:43) Initializing PieCursorUnit
+(0, 08-Απρ-2011 21:44:43) Initializing PieMouse
+(0, 08-Απρ-2011 21:44:43) Initializing PieKeyboard
+(0, 08-Απρ-2011 21:44:43) Initializing PieInput
+(0, 08-Απρ-2011 21:44:43) Initializing PieOSC
+(0, 08-Απρ-2011 21:44:43) Initializing PiePie
+(0, 08-Απρ-2011 21:44:43) Initializing PieFunction
+(0, 08-Απρ-2011 21:44:43) Initializing PieStatement
+(0, 08-Απρ-2011 21:44:43) Initializing PieExpression
+(0, 08-Απρ-2011 21:44:43) Initializing PieJoystick
+(0, 08-Απρ-2011 21:44:43) Initializing PieP5
+(0, 08-Απρ-2011 21:44:43) Initializing PieMidi
+(0, 08-Απρ-2011 21:44:43) Initializing PiePPJoy
+(0, 08-Απρ-2011 21:44:43) Initializing PieRemote
+(0, 08-Απρ-2011 21:44:43) Initializing Pie Speech Recognition
+(0, 08-Απρ-2011 21:44:43) Initializing PieScreen
+(0, 08-Απρ-2011 21:44:43) GetMonitorEDID
+(0, 08-Απρ-2011 21:44:43) Initializing PieWIndow
+(0, 08-Απρ-2011 21:44:43) Initializing PieCursors
+(0, 08-Απρ-2011 21:44:43) Initializing PieZ800
+(0, 08-Απρ-2011 21:44:43) Initializing PieIntersense
+(0, 08-Απρ-2011 21:44:43) Initializing PieFastrak
+(0, 08-Απρ-2011 21:44:43) Initializing PiePPT
+(0, 08-Απρ-2011 21:44:43) Initializing PieTrackIR
+(0, 08-Απρ-2011 21:44:43) Initializing PiePinch
+(0, 08-Απρ-2011 21:44:43) Starting main
+(0, 08-Απρ-2011 21:44:43) Application object initialized
+(0, 08-Απρ-2011 21:44:43) Creating main window
+(0, 08-Απρ-2011 21:44:43) EditorForm.Create
+(0, 08-Απρ-2011 21:44:43) Checking command line parameters:
+(0, 08-Απρ-2011 21:44:44) Creating debug window
+(0, 08-Απρ-2011 21:44:44) Assigning exception handler
+(0, 08-Απρ-2011 21:44:44) Creating debug remote control window
+(0, 08-Απρ-2011 21:44:44) Running application
+(0, 08-Απρ-2011 21:44:46) File>Open
+(0, 08-Απρ-2011 21:44:48) ClearMidiGui
+(0, 08-Απρ-2011 21:44:50) RunButton
+(0, 08-Απρ-2011 21:44:50) Compile>Run
+(0, 08-Απρ-2011 21:44:50) Compile>Compile
+(0, 08-Απρ-2011 21:44:50) CompileCode
+(0, 08-Απρ-2011 21:44:50) StartingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:44:50) EnumerateJoysticks
+(0, 08-Απρ-2011 21:44:50) Enumerated... BadGamePad = False
+(0, 08-Απρ-2011 21:44:50) StartCompileTimeP5 False
+(0, 08-Απρ-2011 21:44:50) StoppingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:44:50) StartRuntime
+(0, 08-Απρ-2011 21:44:50) StartingInputMonitor Mouse
+(0, 08-Απρ-2011 21:44:53) StartRuntimeJoystick
+(0, 08-Απρ-2011 21:44:53) ************************* False
+(0, 08-Απρ-2011 21:44:55) StopButton
+(0, 08-Απρ-2011 21:44:55) Compile>Stop
+(0, 08-Απρ-2011 21:44:55) StopRuntime
+(0, 08-Απρ-2011 21:44:55) StoppingInputMonitor Mouse
+(0, 08-Απρ-2011 21:44:55) StopRuntimeJoystick
+(0, 08-Απρ-2011 21:44:55) RunButton
+(0, 08-Απρ-2011 21:44:55) Compile>Run
+(0, 08-Απρ-2011 21:44:55) Compile>Compile
+(0, 08-Απρ-2011 21:44:55) CompileCode
+(0, 08-Απρ-2011 21:44:55) StartingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:44:55) EnumerateJoysticks
+(0, 08-Απρ-2011 21:44:55) Enumerated... BadGamePad = False
+(0, 08-Απρ-2011 21:44:55) StartCompileTimeP5 False
+(0, 08-Απρ-2011 21:44:55) StoppingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:44:55) StartRuntime
+(0, 08-Απρ-2011 21:44:55) StartingInputMonitor Mouse
+(0, 08-Απρ-2011 21:44:57) StartRuntimeJoystick
+(0, 08-Απρ-2011 21:44:57) ************************* False
+(0, 08-Απρ-2011 21:45:06) StopButton
+(0, 08-Απρ-2011 21:45:06) Compile>Stop
+(0, 08-Απρ-2011 21:45:06) StopRuntime
+(0, 08-Απρ-2011 21:45:06) StoppingInputMonitor Mouse
+(0, 08-Απρ-2011 21:45:06) StopRuntimeJoystick
+(0, 08-Απρ-2011 21:45:08) RunButton
+(0, 08-Απρ-2011 21:45:08) Compile>Run
+(0, 08-Απρ-2011 21:45:08) Compile>Compile
+(0, 08-Απρ-2011 21:45:08) CompileCode
+(0, 08-Απρ-2011 21:45:08) StartingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:45:08) EnumerateJoysticks
+(0, 08-Απρ-2011 21:45:08) Enumerated... BadGamePad = False
+(0, 08-Απρ-2011 21:45:08) StartCompileTimeP5 False
+(0, 08-Απρ-2011 21:45:08) StoppingInputMonitor CompileJoystick
+(0, 08-Απρ-2011 21:45:08) StartRuntime
+(0, 08-Απρ-2011 21:45:08) StartingInputMonitor Mouse
+(0, 08-Απρ-2011 21:45:11) StartRuntimeJoystick
+(0, 08-Απρ-2011 21:45:11) ************************* False
+(0, 08-Απρ-2011 21:45:57) StopButton
+(0, 08-Απρ-2011 21:45:57) Compile>Stop
+(0, 08-Απρ-2011 21:45:57) StopRuntime
+(0, 08-Απρ-2011 21:45:57) StoppingInputMonitor Mouse
+(0, 08-Απρ-2011 21:45:57) StopRuntimeJoystick
+(0, 08-Απρ-2011 21:45:58) FormCloseQuery
+(0, 08-Απρ-2011 21:45:58) Compile>Stop
+(0, 08-Απρ-2011 21:45:58) Application finished
+(0, 08-Απρ-2011 21:45:58) Destroying EditorForm
+(0, 08-Απρ-2011 21:45:58) Finalizing PiePinch
+(0, 08-Απρ-2011 21:45:58) Finalizing PieTrackIR
+(0, 08-Απρ-2011 21:45:58) Finalizing PiePPT
+(0, 08-Απρ-2011 21:45:58) Finalizing PieFastrak
+(0, 08-Απρ-2011 21:45:58) Finalizing PieIntersense
+(0, 08-Απρ-2011 21:45:58) Finalizing PieZ800
+(0, 08-Απρ-2011 21:45:58) Finalizing PieCursors
+(0, 08-Απρ-2011 21:45:58) Finalizing PieWindow
+(0, 08-Απρ-2011 21:45:58) Finalizing PieScreen
+(0, 08-Απρ-2011 21:45:58) Finalizing Pie Speech Recognition
+(0, 08-Απρ-2011 21:45:58) Finalizing PieRemote
+(0, 08-Απρ-2011 21:45:58) Finalizing PiePPJoy
+(0, 08-Απρ-2011 21:45:58) Finalizing PieMidi
+(0, 08-Απρ-2011 21:45:58) Finalizing PieP5
+(0, 08-Απρ-2011 21:45:58) Finalizing PieJoystick
+(0, 08-Απρ-2011 21:45:58) Finalizing PieStatement
+(0, 08-Απρ-2011 21:45:58) Finalizing PieFunction
+(0, 08-Απρ-2011 21:45:58) Finalizing PiePie
+(0, 08-Απρ-2011 21:45:58) Finalizing PieOSC
+(0, 08-Απρ-2011 21:45:58) Finalizing PieKeyboard
+(0, 08-Απρ-2011 21:45:58) Finalizing PieMouse
+(0, 08-Απρ-2011 21:45:58) Finalizing PieVariables
+(0, 08-Απρ-2011 21:45:58) Finalizing PieSpeech
+(0, 08-Απρ-2011 21:45:58) Finalizing PieLog
+(0, 08-Απρ-2011 21:45:58) Closing log file

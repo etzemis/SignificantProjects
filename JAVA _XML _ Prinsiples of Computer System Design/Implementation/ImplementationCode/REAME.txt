@@ -1,0 +1,4 @@
+README
+
+when we want to run a partition or a Proxy we have to give as input the file the data or the configuration is loaded.
+I have included some example of those files.

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/13/Server/src/Server
+END
+Profile.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/3/Server/src/Server/Profile.java
+END
+ConnectionDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/src/Server/ConnectionDB.java
+END
+CoinHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/src/Server/CoinHandler.java
+END
+Server.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/src/Server/Server.java
+END
+CmdThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/3/Server/src/Server/CmdThread.java
+END
+ClientHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/src/Server/ClientHandler.java
+END
+Player.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/13/Server/src/Server/Player.java
+END
+ChatHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/src/Server/ChatHandler.java
+END
+Pairs.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/3/Server/src/Server/Pairs.java
+END

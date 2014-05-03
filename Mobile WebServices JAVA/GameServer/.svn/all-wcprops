@@ -1,0 +1,27 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 49
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server
+END
+manifest.mf
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/3/Server/manifest.mf
+END
+catalog.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/catalog.xml
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/anaptyjh3~anaptyjh-code-repository/!svn/ver/14/Server/build.xml
+END

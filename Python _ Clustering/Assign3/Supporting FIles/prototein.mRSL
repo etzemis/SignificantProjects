@@ -1,0 +1,39 @@
+::VGRID::
+eScience/Courses/ClusterComputing
+
+::EXECUTE::
+uname -a
+export PYRO_TCP_LISTEN_BACKLOG=$((4*MIG_JOBNODECOUNT*MIG_JOBCPUCOUNT))
+export PYRO_MAXCONNECTIONS=$((4*MIG_JOBNODECOUNT*MIG_JOBCPUCOUNT))
+export PSPYTHON=$PYTHON
+$PSCLEAN
+export PSPROCS=$((MIG_JOBNODECOUNT*MIG_JOBCPUCOUNT))
+export PSWAITPROCS=$PSPROCS
+$PSRUN prototein.py $PSPROCS 
+$PSCLEAN prototein.py calcfolding.py
+
+::INPUTFILES::
+prototein.py
+calcfolding.py
+
+::CPUTIME::
+900
+
+::CPUCOUNT::
+32
+
+::NODECOUNT::
+8
+
+::MEMORY::
+8192
+
+::RUNTIMEENVIRONMENT::
+PYTHON-2.X-1
+PYPASTSET-ANY-2
+
+::NOTIFY::
+jabber: SETTINGS
+
+
+

@@ -1,0 +1,49 @@
+
+package Server;
+
+public class Player {
+    int id;
+    private String ip;
+    private int wins;
+    private int ties;
+    private int loses;
+    int coins;
+
+    public Player(int ID,String IP){
+        id=ID;
+        ip=IP;
+        this.coins=0;                 //παντα αρχικοποιείται με μηδεν και μετα αν θελει βαζει μοναδες(coins)
+        wins=0;ties=0;loses=0;
+    }
+
+    public boolean hasID(int id){
+        if(this.id==id) return true;
+        else return false;
+    }
+
+    public boolean hasIP(String IP){
+        if(ip.equals(IP)) return true;
+        else return false;
+    }
+
+    public void win(){
+        wins++;
+    }
+
+    public void tie(){
+        ties++;
+    }
+
+    public void lose(){
+        loses++;
+    }
+
+    public void print(){                                                        
+       int i;
+       int games=wins+ties+loses;
+       System.out.println("\t"+id+"\t|\t"+ip+"\t|\t"+games+"\t|\t"+wins+"\t|\t"+ties+"\t|\t"+loses+"\t|\t"+(wins/(wins+loses)));
+    }
+    
+}
+
+

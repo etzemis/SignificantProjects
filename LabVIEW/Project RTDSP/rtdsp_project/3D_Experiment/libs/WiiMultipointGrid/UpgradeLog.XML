@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WiiMultipointGrid">
+</Property><Property Name="Solution File" Value="C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\WiiMultipointGrid.sln">
+</Property><Property Name="User Options File" Value="C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\WiiMultipointGrid.suo">
+</Property><Property Name="Date" Value="Παρασκευή, 17 Δεκεμβρίου 2010">
+</Property><Property Name="Time" Value="16:41 μμ">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WiiMultipointGrid.sln" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiiMultipointGrid.sln">
+</Event><Event ErrorLevel="0" Project="" Source="WiiMultipointGrid.suo" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiiMultipointGrid.suo">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj" Description="Project file successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiiMultipointGrid.csproj">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj.user" Description="Project user file successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiiMultipointGrid.csproj.user">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="AffineTransformSolver.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\AffineTransformSolver.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmut.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmut.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutdata.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutdata.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutenum.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutenum.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutexception.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutexception.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutgui.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutgui.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutmesh.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutmesh.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutmisc.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutmisc.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\dxmutSettingsDlg.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\dxmutSettingsDlg.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="CrosshairCursor.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\CrosshairCursor.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiimoteLib\DataTypes.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiimoteLib\DataTypes.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiimoteLib\Events.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiimoteLib\Events.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiimoteLib\HIDImports.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiimoteLib\HIDImports.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiimoteLib\NetworkServer.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiimoteLib\NetworkServer.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiimoteLib\Wiimote.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiimoteLib\Wiimote.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiiMultipointGrid.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\WiiMultipointGrid.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Warper.cs" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Warper.cs">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="Common\directx.ico" Description="File successfully backed up as C:\Users\Χρήστος\Desktop\Systems real time\koupe proj\WiiMultipointGrid\Backup\Common\directx.ico">
+</Event><Event ErrorLevel="1" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WiiMultipointGrid.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WiiMultipointGrid.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WiiMultipointGrid" Source="WiiMultipointGrid.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,223 @@
+﻿/*
+    WiiMotion Plus Mouse                                  v 2010.01.28
+    by lednerg
+
+    Emulates the basic functionality of a Gyration Air Mouse.
+    Requires GlovePIE version .42 or higher.
+
+    Leave the Wiimote on your desk when starting so it can calibrate.
+    Wait until only the first LED is lit.
+
+    A = Left-Click, + = Right-Click, Down = Middle-Click
+    If var.HoldToMove is true, Hold B to move
+    If var.HoldToMove is false, Hold B to stop ...
+    ...and you can flip Wiimote upside-down to use normal mouse
+    Home = Battery Test
+*/
+
+// ==== Buttons ================================================================
+var.MoveButton = wiimote.B
+mouse.LeftButton = wiimote.A
+mouse.RightButton = wiimote.Plus
+mouse.MiddleButton = wiimote.Down
+var.BatteryTestButton = wiimote.Home
+
+// ==== Options ================================================================
+var.HoldToMove = true
+// true = Hold MoveButton to move
+// false = Hold MoveButton to stop, flip Wiimote upside-down to use normal mouse
+
+var.EdgeStop = true
+// Stops movement at the edge of the screen
+
+var.Speed = 75  // 0 to 100
+// Overall speed of movement
+
+var.Mouse_Precision = 7.5 // 0 to 15
+// Low values smooth the movement of the cursor
+
+PIE.FrameRate = 100hz  // Wii MotionPlus has a refresh rate of 100hz
+
+// ==== Wii MotionPlus =========================================================
+// Start of Wii Motion Plus script
+IF HeldDown(abs(wiimote.SmoothRoll)>135, 1 second) THEN var.WiimoteUpsideDown = true ELSE var.WiimoteUpsideDown = false
+IF var.HoldToMove = true {
+   var.Move = var.MoveButton
+ELSE
+   IF var.MoveButton = false AND var.WiimoteUpsideDown = false THEN var.Move = true ELSE var.Move = false
+}
+IF wiimote.HasMotionPlus = false THEN var.CalibDebug = "[ WiiMotion Plus NOT DETECTED! ]" ELSE var.CalibDebug = ""
+IF wiimote.HasMotionPlus = true AND var.Move = true {
+   var.YawSpeed = wiimote.MotionPlus.YawSpeed
+   var.PitchSpeed = wiimote.MotionPlus.PitchSpeed
+   IF SameValue( Smooth(wiimote.Roll, 30), wiimote.Roll, 50) THEN var.Roll = Smooth(wiimote.Roll, 30) ELSE var.Roll = wiimote.Roll
+   IF var.Roll < 0 AND var.Roll >= -90 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, -90, 0, 0, 1)
+      var.RightDown = -1
+      var.TopUp = 1
+   }
+   IF var.Roll <= 90 AND var.Roll >= 0 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, 90, 0, 0, 1)
+      var.RightDown = 1
+      var.TopUp = 1
+   }
+   IF var.Roll > 90 AND var.Roll <= 180 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, 90, 180, 0, 1)
+      var.RightDown = 1
+      var.TopUp = -1
+   }
+   IF var.Roll < -90 AND var.Roll >= -180 {
+      var.XYswap = 1 - EnsureMapRange(var.Roll, -90, -180, 0, 1)
+      var.RightDown = -1
+      var.TopUp = -1
+   }
+   var.TopUpFix = Smooth(var.TopUp,30) / abs(Smooth(var.TopUp,30))
+   var.RightDownFix = Smooth(var.RightDown,30) / abs(Smooth(var.RightDown,30))
+   var.SpeedX = var.TopUpFix * var.YawSpeed - ( var.TopUpFix * var.YawSpeed * var.XYswap ) + ( var.RightDownFix * var.PitchSpeed * var.XYswap )
+   var.SpeedY = var.TopUpFix * var.PitchSpeed - ( var.TopUpFix * var.PitchSpeed * var.XYswap) + ( -var.RightDownFix * var.YawSpeed * var.XYswap )
+   var.Mouse_X = var.Mouse_X + ( var.SpeedX / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+   var.Mouse_Y = var.Mouse_Y - ( var.SpeedY / (20500 - EnsureMapRange(var.Speed, 0, 100, 0, 20000) ) )
+}
+IF var.Move = false {
+   IF delta(var.Move) = true {
+      var.Mouse_X = var.CursorX
+      var.Mouse_Y = var.CursorY
+   }
+   var.Mouse_X = mouse.x
+   var.Mouse_Y = mouse.y
+ELSE
+   IF var.EdgeStop = true {
+      var.Mouse_X = EnsureRange(var.Mouse_X, 0, 1)
+      var.Mouse_Y = EnsureRange(var.Mouse_Y, 0, 1)
+   }
+   mouse.x = var.CursorX
+   mouse.y = var.CursorY
+   IF delta(var.Move) = true {
+      var.Mouse_X = var.CursorX
+      var.Mouse_Y = var.CursorY
+   }
+}
+
+// ==== Dynamic Motion Smoothing ===============================================
+//  This automatically adjusts the smoothness
+//  of the movement based on the cursor's speed.
+var.Mouse_Speed_X = int(abs(delta(var.Mouse_X))*1000)
+var.Mouse_Speed_Y = int(abs(delta(var.Mouse_Y))*1000)
+var.Mouse_Speed_XY = int(sqrt(var.Mouse_Speed_X + var.Mouse_Speed_Y) * var.Mouse_Precision)
+IF var.Mouse_Speed_XY >= 30 THEN var.Mouse_SmoothHold = 0 ELSE var.Mouse_SmoothHold = 30 - var.Mouse_Speed_XY
+var.Mouse_SmoothLimit = 30 - EnsureRange(var.Mouse_Precision*2, 0, 30)
+IF var.Mouse_SmoothHold < var.Mouse_Smooth THEN var.Mouse_Smooth = var.Mouse_Smooth - (1 + int(EnsureMapRange(var.Mouse_SmoothHold, 0, 30, 30, 0)))
+IF var.Mouse_SmoothHold > var.Mouse_Smooth OR (var.Mouse_SmoothHold = 30 AND var.Mouse_Smooth <= 29) {
+   wait EnsureMapRange(var.Mouse_Smooth, 0, 29, 0, 100)ms
+   IF var.Mouse_Smooth < var.Mouse_SmoothLimit THEN var.Mouse_Smooth++
+}
+IF var.Mouse_Smooth <= 0 THEN var.Mouse_Smooth = 0
+IF var.Mouse_Smooth <= 0 THEN var.CursorX = var.Mouse_X
+IF var.Mouse_Smooth <= 0 THEN var.CursorY = var.Mouse_Y
+IF var.Mouse_Smooth = 1 THEN var.CursorX = Smooth(var.Mouse_X, 1)
+IF var.Mouse_Smooth = 1 THEN var.CursorY = Smooth(var.Mouse_Y, 1)
+IF var.Mouse_Smooth = 2 THEN var.CursorX = Smooth(var.Mouse_X, 2)
+IF var.Mouse_Smooth = 2 THEN var.CursorY = Smooth(var.Mouse_Y, 2)
+IF var.Mouse_Smooth = 3 THEN var.CursorX = Smooth(var.Mouse_X, 3)
+IF var.Mouse_Smooth = 3 THEN var.CursorY = Smooth(var.Mouse_Y, 3)
+IF var.Mouse_Smooth = 4 THEN var.CursorX = Smooth(var.Mouse_X, 4)
+IF var.Mouse_Smooth = 4 THEN var.CursorY = Smooth(var.Mouse_Y, 4)
+IF var.Mouse_Smooth = 5 THEN var.CursorX = Smooth(var.Mouse_X, 5)
+IF var.Mouse_Smooth = 5 THEN var.CursorY = Smooth(var.Mouse_Y, 5)
+IF var.Mouse_Smooth = 6 THEN var.CursorX = Smooth(var.Mouse_X, 6)
+IF var.Mouse_Smooth = 6 THEN var.CursorY = Smooth(var.Mouse_Y, 6)
+IF var.Mouse_Smooth = 7 THEN var.CursorX = Smooth(var.Mouse_X, 7)
+IF var.Mouse_Smooth = 7 THEN var.CursorY = Smooth(var.Mouse_Y, 7)
+IF var.Mouse_Smooth = 8 THEN var.CursorX = Smooth(var.Mouse_X, 8)
+IF var.Mouse_Smooth = 8 THEN var.CursorY = Smooth(var.Mouse_Y, 8)
+IF var.Mouse_Smooth = 9 THEN var.CursorX = Smooth(var.Mouse_X, 9)
+IF var.Mouse_Smooth = 9 THEN var.CursorY = Smooth(var.Mouse_Y, 9)
+IF var.Mouse_Smooth = 10 THEN var.CursorX = Smooth(var.Mouse_X, 10)
+IF var.Mouse_Smooth = 10 THEN var.CursorY = Smooth(var.Mouse_Y, 10)
+IF var.Mouse_Smooth = 11 THEN var.CursorX = Smooth(var.Mouse_X, 11)
+IF var.Mouse_Smooth = 11 THEN var.CursorY = Smooth(var.Mouse_Y, 11)
+IF var.Mouse_Smooth = 12 THEN var.CursorX = Smooth(var.Mouse_X, 12)
+IF var.Mouse_Smooth = 12 THEN var.CursorY = Smooth(var.Mouse_Y, 12)
+IF var.Mouse_Smooth = 13 THEN var.CursorX = Smooth(var.Mouse_X, 13)
+IF var.Mouse_Smooth = 13 THEN var.CursorY = Smooth(var.Mouse_Y, 13)
+IF var.Mouse_Smooth = 14 THEN var.CursorX = Smooth(var.Mouse_X, 14)
+IF var.Mouse_Smooth = 14 THEN var.CursorY = Smooth(var.Mouse_Y, 14)
+IF var.Mouse_Smooth = 15 THEN var.CursorX = Smooth(var.Mouse_X, 15)
+IF var.Mouse_Smooth = 15 THEN var.CursorY = Smooth(var.Mouse_Y, 15)
+IF var.Mouse_Smooth = 16 THEN var.CursorX = Smooth(var.Mouse_X, 16)
+IF var.Mouse_Smooth = 16 THEN var.CursorY = Smooth(var.Mouse_Y, 16)
+IF var.Mouse_Smooth = 17 THEN var.CursorX = Smooth(var.Mouse_X, 17)
+IF var.Mouse_Smooth = 17 THEN var.CursorY = Smooth(var.Mouse_Y, 17)
+IF var.Mouse_Smooth = 18 THEN var.CursorX = Smooth(var.Mouse_X, 18)
+IF var.Mouse_Smooth = 18 THEN var.CursorY = Smooth(var.Mouse_Y, 18)
+IF var.Mouse_Smooth = 19 THEN var.CursorX = Smooth(var.Mouse_X, 19)
+IF var.Mouse_Smooth = 19 THEN var.CursorY = Smooth(var.Mouse_Y, 19)
+IF var.Mouse_Smooth = 20 THEN var.CursorX = Smooth(var.Mouse_X, 20)
+IF var.Mouse_Smooth = 20 THEN var.CursorY = Smooth(var.Mouse_Y, 20)
+IF var.Mouse_Smooth = 21 THEN var.CursorX = Smooth(var.Mouse_X, 21)
+IF var.Mouse_Smooth = 21 THEN var.CursorY = Smooth(var.Mouse_Y, 21)
+IF var.Mouse_Smooth = 22 THEN var.CursorX = Smooth(var.Mouse_X, 22)
+IF var.Mouse_Smooth = 22 THEN var.CursorY = Smooth(var.Mouse_Y, 22)
+IF var.Mouse_Smooth = 23 THEN var.CursorX = Smooth(var.Mouse_X, 23)
+IF var.Mouse_Smooth = 23 THEN var.CursorY = Smooth(var.Mouse_Y, 23)
+IF var.Mouse_Smooth = 24 THEN var.CursorX = Smooth(var.Mouse_X, 24)
+IF var.Mouse_Smooth = 24 THEN var.CursorY = Smooth(var.Mouse_Y, 24)
+IF var.Mouse_Smooth = 25 THEN var.CursorX = Smooth(var.Mouse_X, 25)
+IF var.Mouse_Smooth = 25 THEN var.CursorY = Smooth(var.Mouse_Y, 25)
+IF var.Mouse_Smooth = 26 THEN var.CursorX = Smooth(var.Mouse_X, 26)
+IF var.Mouse_Smooth = 26 THEN var.CursorY = Smooth(var.Mouse_Y, 26)
+IF var.Mouse_Smooth = 27 THEN var.CursorX = Smooth(var.Mouse_X, 27)
+IF var.Mouse_Smooth = 27 THEN var.CursorY = Smooth(var.Mouse_Y, 27)
+IF var.Mouse_Smooth = 28 THEN var.CursorX = Smooth(var.Mouse_X, 28)
+IF var.Mouse_Smooth = 28 THEN var.CursorY = Smooth(var.Mouse_Y, 28)
+IF var.Mouse_Smooth = 29 THEN var.CursorX = Smooth(var.Mouse_X, 29)
+IF var.Mouse_Smooth = 29 THEN var.CursorY = Smooth(var.Mouse_Y, 29)
+IF var.Mouse_Smooth >= 30 THEN var.CursorX = Smooth(var.Mouse_X, 30)
+IF var.Mouse_Smooth >= 30 THEN var.CursorY = Smooth(var.Mouse_Y, 30)
+
+// ==== Wiimote Battery Test  =================================================
+// Fills up with blinking LEDs to 50%
+// then fills with solid LEDs to 100%
+if var.BatteryDebug = false then var.BatteryDebug = ""
+if var.BatteryTestButton = true and var.BatteryDisplayOn != true {
+   wiimote.Report15 = 0x80 | int(wiimote.Rumble)
+   var.BatteryLevel = wiimote.Battery
+   var.BatteryDebug = " [ Battery : "+(int(var.BatteryLevel/1.92))+"% ] "
+   var.BatteryLEDs = 0
+   var.BatteryLEDbefore = wiimote.LEDs
+   var.BatteryDisplayOn = true
+}
+if var.BatteryDisplayOn = true {
+   if var.BatteryLEDs <= var.BatteryLevel {
+      var.BatteryLEDs = var.BatteryLEDs + 12
+      wait 60ms
+   else
+      wait 1000ms
+      var.BatteryDisplayOn = "done"
+   }
+   if var.BatteryLEDs <= 96 {
+      var.BatteryLED_A = 0
+      if var.BatteryLEDs <= 24 then var.BatteryLED_B = 1
+      if var.BatteryLEDs > 24 and var.BatteryLEDs <= 48 then var.BatteryLED_B = 3
+      if var.BatteryLEDs > 48 and var.BatteryLEDs <= 72 then var.BatteryLED_B = 7
+      if var.BatteryLEDs > 72 then var.BatteryLED_B = 15
+   else
+      if var.BatteryLEDs <= 120 then var.BatteryLED_A = 1
+      if var.BatteryLEDs > 120 and var.BatteryLEDs <= 144 then var.BatteryLED_A = 3
+      if var.BatteryLEDs > 144 and var.BatteryLEDs <= 168 then var.BatteryLED_A = 7
+      if var.BatteryLEDs > 168 then var.BatteryLED_A = 15
+   }
+   wiimote.LEDs = var.BatteryLED_A
+   wait 40ms
+   wiimote.LEDs = var.BatteryLED_B
+   wait 20ms
+elseif var.BatteryDisplayOn = "done"
+   wiimote.LEDs = 0
+   wait 2 seconds
+   wiimote.LEDs = var.BatteryLEDbefore
+   var.BatteryDisplayOn = false
+}
+
+debug = var.CalibDebug + var.DebugPrecision + var.DebugSmooth + var.BatteryDebug
+var.DebugPrecision = " [ Precision: "+ var.Mouse_Precision +" ]"
+var.DebugSmooth = " [ Smooth: "+ int(var.Mouse_Smooth) +" ]"

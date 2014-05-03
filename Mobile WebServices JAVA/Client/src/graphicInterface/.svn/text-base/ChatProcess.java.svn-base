@@ -1,0 +1,154 @@
+
+package graphicInterface;
+
+
+import java.io.*;
+import javax.microedition.lcdui.*;
+import javax.microedition.io.*;
+import java.util.*;
+
+
+
+
+
+class ChatProcess implements Runnable {
+    private Start midlet;
+    Object lock;
+    private boolean gameOver;
+    TextField send;
+    Thread thread;
+
+    SocketConnection serverSocket;
+    OutputStream serverOut;
+    InputStream serverIn;
+
+    final int howManyMsgs=5;
+
+    public ChatProcess(Start midlet,Object lock){
+
+        try{
+            int i;
+            gameOver=false;                                               //initialize sockets
+            this.lock=lock;
+            this.midlet = midlet;                                               //initialize chatForm
+            midlet.chatForm = new Form("Instant Messaging");
+            for(i=0;i<howManyMsgs;i++){
+                StringItem temp = new StringItem("","");
+                midlet.chatForm.append(temp);
+            }
+            send = new TextField ("Send:", "", 150, TextField.ANY);
+            midlet.chatForm.append(send);
+            midlet.chatForm.addCommand(midlet.sendMessageCommand);
+            midlet.chatForm.addCommand(midlet.goToTrilizaCommand);
+            midlet.chatForm.setCommandListener(midlet);
+        }
+        catch(Exception e){
+            System.err.println("ChatProcess::run: "+e.toString());
+        }
+        System.out.println("1. ChatThread Process...");
+    }
+
+    public void execute(){
+        thread = new Thread(this);
+        try{
+            System.out.println("2. ChatThread Start...");
+            thread.start();
+        }
+        catch(Exception e){
+            System.err.println("ChatProcess"+e.toString());
+        }
+    }
+
+    public void stop(){
+        gameOver=true;
+    }
+
+
+    public void run(){
+        try{
+            synchronized(lock){
+                lock.wait();
+                lock.wait();
+            }
+            System.out.println("chat After Wait");
+            serverSocket=midlet.serverSocket;
+            serverIn = midlet.serverIn;
+            serverOut = midlet.serverOut;
+            while(!gameOver){
+                receiveMSG();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void sendMSG(){                                                      //stelnei prvta send kai meta to msg
+        try{
+            byte[] s = "send\n".getBytes();
+            serverOut.write(s);
+            String displayMessage = send.getString()+"\n";
+            String msg = midlet.player.username+" says: "+send.getString()+" \n";
+            send.setString(null);
+            byte[] data = msg.getBytes();
+            serverOut.write(data);
+            Calendar.getInstance();
+
+            displayMessage="("+now()+") "+midlet.player.username+": "+displayMessage;
+            displayMsg(displayMessage);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void receiveMSG(){
+        try{
+            byte[] data = new byte[100];
+            serverIn.read(data);
+            String temp= new String(data);
+            temp=temp.substring(0,temp.lastIndexOf(' '));
+            System.out.println("msg from server: "+temp);
+            if(temp.equalsIgnoreCase("doCommand")){
+                serverIn.read(data);
+                String t= new String(data);
+                t=t.substring(0,t.lastIndexOf(' '));
+                if(t.equalsIgnoreCase("halt")){
+                    midlet.display.setCurrent(midlet.haltForm);
+                }
+                else if(t.equalsIgnoreCase("buyMore")){
+                    midlet.display.setCurrent(midlet.buyForm);
+                }
+                else if(t.equalsIgnoreCase("continue")){
+                   midlet.display.setCurrent(midlet.trilizaForm);
+                }
+            }
+            displayMsg(temp+'\n');
+            
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(StringIndexOutOfBoundsException ex){
+            //do nothing
+        }
+    }
+
+    private void displayMsg(String msg){
+        int i;
+        midlet.chatForm.delete(0);
+        midlet.chatForm.insert(howManyMsgs-1,new StringItem("",msg));
+    }
+
+    String now() {
+        Calendar c = Calendar.getInstance(TimeZone.getDefault());
+        String time = c.get(Calendar.HOUR_OF_DAY) + ":" +
+        c.get(Calendar.MINUTE) + ":" +
+        c.get(Calendar.SECOND);
+        return time;
+    }
+
+
+
+}
