@@ -5,6 +5,8 @@
 ##Connect Me 
 
 ###Description
+Link: https://github.com/etzemis/ConnectMe
+
 Users are able to insert a destination, create groups with nearby travellers and move towards their common destinations
 
 
