@@ -1,5 +1,13 @@
 # SignificantProjects
 
+# Location Based Mobile App - iOS Development
+
+##Connect Me 
+
+###Description
+Users are able to insert a destination, create groups with nearby travellers and move towards their common destinations
+
+
 # MSc Dissertation - iOS Development
 
 ##Fat Finger 
